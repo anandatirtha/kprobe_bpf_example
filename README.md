@@ -13,4 +13,5 @@ If your environment is set up properly, executing the python script `sudo
 log all connect() and listen() calls made on your system.
 
 
+more info here https://www.kernel.org/doc/Documentation/trace/kprobetrace.txt
 
