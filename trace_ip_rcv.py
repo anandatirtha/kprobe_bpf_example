@@ -11,12 +11,16 @@ int kprobe__inet_listen(struct pt_regs *ctx, struct socket *sock, int backlog)
     bpf_trace_printk("Hello World!\\n");
     return 0;
 };
+
+
+
 int kprobe__ip_rcv(struct pt_regs *ctx, struct sk_buff *skb)
 {
     bpf_trace_printk("ip_rcv!\\n");
     return 0;
 };
 """
+
 
 # 2. Build and Inject program
 b = BPF(text=bpf_text)
@@ -25,3 +29,9 @@ b = BPF(text=bpf_text)
 while True:
     print b.trace_readline()
 
+"""
+The first argument to int kprobe__<fn_name>(struct pt_regs *ctx, ...)
+is always struct pt_regs *ctx
+after that it is the list of arguments the <fn> takes and its optional to have.
+
+"""
